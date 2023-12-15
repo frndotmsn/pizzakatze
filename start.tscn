@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0wl0ne1egnp7"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_dmgv7"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_dmgv7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.8537, 16.2752)
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 5.16399
+offset_top = 27.9566
+offset_right = 112.164
+offset_bottom = 58.9566
+scale = Vector2(0.281426, 0.219629)
+text = "Spiel Starten"
