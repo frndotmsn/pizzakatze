@@ -10,11 +10,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(28.8537, 16.2752)
 
-[node name="Button" type="Button" parent="ColorRect"]
-layout_mode = 0
-offset_left = 5.16399
-offset_top = 27.9566
-offset_right = 112.164
-offset_bottom = 58.9566
-scale = Vector2(0.281426, 0.219629)
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
 text = "Spiel Starten"
+
+[connection signal="pressed" from="Button" to="." method="ändereScene"]
