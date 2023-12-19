@@ -45,14 +45,7 @@ func _input(event):
 			_draw_line()
 			last_mouse_position = get_local_mouse_position()
 
-var my_dict = {}
-
 func _draw_line():
-	var tupel=[last_mouse_position,get_local_mouse_position()]
-	if my_dict.has(current_color):
-		my_dict[current_color].append(tupel)
-	else:
-		my_dict[current_color]=[tupel]
 	var line2d = Line2D.new()
 	line2d.width = width
 	line2d.add_point(last_mouse_position + (last_mouse_position - get_local_mouse_position()).normalized())
