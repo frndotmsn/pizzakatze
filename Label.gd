@@ -12,7 +12,7 @@ func neuePizzabeschreibung():
 	#Basilikum Salami Ananas Oliven Schinken Parmesan Rucola
 	var belag = gibBelag(randi_range(0, 6))
 	var sose = gibSose(randi_range(0, 1))
-	var textFormat = "Belag: %s,  Sose: %s"
+	var textFormat = "Belag: %s,  Soße: %s"
 	text = textFormat % [belag, sose]
 	pass # Replace with function body.
 
@@ -29,7 +29,7 @@ func gibBelag(belagNummer):
 	elif belagNummer == 4:
 		return "Schinken"
 	elif belagNummer == 5:
-		return  "Parmesan"
+		return  "Mozarella"
 	elif belagNummer == 6:
 		return "Rucola"
 	else:
