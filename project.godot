@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="Pizzakatze"
-run/main_scene="res://node_2d.tscn"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Score="*res://Score.gd"
+LoadGoogleReview="*res://LoadGoogleReview.gd"
+
+[display]
+
+window/size/viewport_width=1316
 
 [input]
 

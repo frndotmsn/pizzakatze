@@ -1,0 +1,273 @@
+[gd_scene load_steps=28 format=3 uid="uid://be7n07juhtosw"]
+
+[ext_resource type="Script" path="res://Label.gd" id="1_opdar"]
+[ext_resource type="Script" path="res://DrawTable.gd" id="2_4t4tb"]
+[ext_resource type="Script" path="res://ColorRect.gd" id="2_6itlw"]
+[ext_resource type="Script" path="res://Sterne.gd" id="3_dwyqw"]
+[ext_resource type="PackedScene" uid="uid://pivk6mtybhv1" path="res://Stern.tscn" id="3_wavib"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_fc62f"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_2xevi"]
+events = [SubResource("InputEventAction_fc62f")]
+
+[sub_resource type="Gradient" id="Gradient_ammxa"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.678431, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qimlj"]
+gradient = SubResource("Gradient_ammxa")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_c7qmy"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ao0wq"]
+gradient = SubResource("Gradient_c7qmy")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_64ruq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.941176, 0.647059, 0.486275, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gneow"]
+gradient = SubResource("Gradient_64ruq")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_fptun"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.678431, 0.0392157, 0.329412, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vto61"]
+gradient = SubResource("Gradient_fptun")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_38ael"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.741176, 0.356863, 0.572549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_05vr6"]
+gradient = SubResource("Gradient_38ael")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_68wwu"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0588235, 0.313726, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nadon"]
+gradient = SubResource("Gradient_68wwu")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_g6nsx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0784314, 0.411765, 0.0392157, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8lkr3"]
+gradient = SubResource("Gradient_g6nsx")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_4xf31"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.764706, 0.705882, 0.156863, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_icly7"]
+gradient = SubResource("Gradient_4xf31")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_kew4w"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0784314, 0.0588235, 0.0784314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7x1lv"]
+gradient = SubResource("Gradient_kew4w")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_vnq0g"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.156863, 0.490196, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_slx6u"]
+gradient = SubResource("Gradient_vnq0g")
+width = 128
+height = 128
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("sterne", "rect")]
+script = ExtResource("2_4t4tb")
+sterne = NodePath("Sterne")
+rect = NodePath("VBoxContainer/ColorRect")
+win_threshold = 3.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 800.0
+offset_bottom = 450.0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" node_paths=PackedStringArray("width_slider")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.15
+script = ExtResource("2_6itlw")
+width_slider = NodePath("../HBoxContainer/width slider")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="clear_all" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Alles Löschen"
+
+[node name="width slider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 4.0
+max_value = 24.0
+step = 2.0
+value = 4.0
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_2xevi")
+text = "In den Ofen schieben!"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 809.0
+offset_top = 50.0
+offset_right = 1119.0
+offset_bottom = 73.0
+text = "Google Rezension"
+autowrap_mode = 3
+script = ExtResource("1_opdar")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 7.0
+offset_top = 462.0
+offset_right = 1323.0
+offset_bottom = 590.0
+
+[node name="tomato_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_qimlj")
+metadata/_edit_use_anchors_ = true
+
+[node name="mozarella_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_ao0wq")
+metadata/_edit_use_anchors_ = true
+
+[node name="dough_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_gneow")
+metadata/_edit_use_anchors_ = true
+
+[node name="salami_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_vto61")
+metadata/_edit_use_anchors_ = true
+
+[node name="prosciutto_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_05vr6")
+metadata/_edit_use_anchors_ = true
+
+[node name="rucola_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_nadon")
+metadata/_edit_use_anchors_ = true
+
+[node name="basil_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_8lkr3")
+metadata/_edit_use_anchors_ = true
+
+[node name="pineapple_button (don\'t press)" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_icly7")
+metadata/_edit_use_anchors_ = true
+
+[node name="olives_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_7x1lv")
+metadata/_edit_use_anchors_ = true
+
+[node name="pesto_button" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_slx6u")
+metadata/_edit_use_anchors_ = true
+
+[node name="NewPizza" type="Button" parent="."]
+offset_left = 811.0
+offset_top = 14.0
+offset_right = 992.0
+offset_bottom = 45.0
+text = "Neue Pizza generieren
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sterne" type="Node2D" parent="."]
+position = Vector2(175, 159)
+scale = Vector2(0.505, 0.505)
+script = ExtResource("3_dwyqw")
+
+[node name="Stern" parent="Sterne" instance=ExtResource("3_wavib")]
+
+[node name="Stern2" parent="Sterne" instance=ExtResource("3_wavib")]
+position = Vector2(350, 0)
+
+[node name="Stern3" parent="Sterne" instance=ExtResource("3_wavib")]
+position = Vector2(700, 0)
+
+[node name="Stern4" parent="Sterne" instance=ExtResource("3_wavib")]
+position = Vector2(1050, 0)
+
+[node name="Stern5" parent="Sterne" instance=ExtResource("3_wavib")]
+position = Vector2(1400, 0)
+
+[node name="Button" type="Button" parent="Sterne"]
+offset_left = 621.782
+offset_top = 219.802
+offset_right = 651.782
+offset_bottom = 250.802
+scale = Vector2(4.99959, 4.99959)
+text = "Nächste Pizza"
+
+[node name="RoundnessCalculator" type="RoundnessCalculator" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="begin" from="VBoxContainer/ColorRect" to="." method="_on_color_rect_begin"]
+[connection signal="new_line" from="VBoxContainer/ColorRect" to="." method="_on_color_rect_new_line"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/clear_all" to="." method="clear"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/width slider" to="." method="set_width"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="in_den_ofen_schieben"]
+[connection signal="pressed" from="HBoxContainer/tomato_button" to="." method="_on_tomato_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/mozarella_button" to="." method="_on_mozarella_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/dough_button" to="." method="_on_dough_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/salami_button" to="." method="_on_salami_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/prosciutto_button" to="." method="_on_prosciutto_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/rucola_button" to="." method="_on_rucola_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/basil_button" to="." method="_on_basil_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/pineapple_button (don't press)" to="." method="_on_pineapple_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/olives_button" to="." method="_on_olives_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/pesto_button" to="." method="_on_pesto_button_pressed"]
+[connection signal="pressed" from="NewPizza" to="." method="_on_new_pizza_pressed"]
+[connection signal="pressed" from="Sterne/Button" to="." method="_on_next_pizza_pressed"]
+[connection signal="invalid_polygon" from="RoundnessCalculator" to="." method="_on_roundness_calculator_invalid_polygon"]
+[connection signal="roundness" from="RoundnessCalculator" to="." method="_on_roundness_calculator_roundness"]
+[connection signal="request_completed" from="HTTPRequest" to="Label" method="_on_http_request_request_completed"]

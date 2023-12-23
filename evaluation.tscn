@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpiing6bhnrmd"]
+
+[ext_resource type="Script" path="res://Evaluation.gd" id="1_8byss"]
+
+[node name="Evaluation" type="Node2D" node_paths=PackedStringArray("message", "average_score")]
+script = ExtResource("1_8byss")
+message = NodePath("CenterContainer/VBoxContainer/CenterContainer/BoxContainer/Message")
+average_score = NodePath("CenterContainer/VBoxContainer/HBoxContainer/AverageScore")
+threshold = 3.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1316.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="You" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/BoxContainer"]
+layout_mode = 2
+text = "You"
+
+[node name="Message" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/BoxContainer"]
+layout_mode = 2
+text = "won/lost"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AverageScoreText" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Durchschnittliche Punktzahl:"
+
+[node name="AverageScore" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "unbekannt"
+
+[node name="BackToMainScreen" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Zurück zum Hauptmenü"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackToMainScreen" to="." method="_on_back_to_main_screen_pressed"]
