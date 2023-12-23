@@ -10,5 +10,8 @@ func _process(delta):
 	pass
 
 
-func _on_button_pressed():
+func _on_spiel_beginnen_pressed():
 	get_tree().change_scene_to_file("res://node_2d.tscn")
+
+func _on_tutorial_pressed():
+	get_tree().change_scene_to_file("res://Tutorial.tscn")

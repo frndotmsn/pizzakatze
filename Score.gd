@@ -1,7 +1,11 @@
 extends Node2D
 
 var scores_of_the_day = []
-var average : float
+var highscore : float = 0
+var highscore_pizzas : int = 0
 
-func set_average(new_average):
-	average = new_average
+func average():
+	return float(total())/float(scores_of_the_day.size())
+
+func total():
+	return scores_of_the_day.reduce(func(a, b): return a+b, 0)

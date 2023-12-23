@@ -17,7 +17,7 @@ func neue_pizza():
 	var belag = gibBelag(randi_range(0, 6))
 	var sose = gibSose(randi_range(0, 1))
 	
-	google_pizza_review_requester.request_review(PackedStringArray([belag, sose]))
+	google_pizza_review_requester.request_review(PackedStringArray([belag, sose]))	
 
 # Gibt ein Belag zur belagNummer
 func gibBelag(belagNummer):

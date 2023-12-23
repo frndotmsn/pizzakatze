@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://be7n07juhtosw"]
+[gd_scene load_steps=31 format=3 uid="uid://be7n07juhtosw"]
 
 [ext_resource type="Script" path="res://DrawTable.gd" id="2_4t4tb"]
 [ext_resource type="Script" path="res://ColorRect.gd" id="2_6itlw"]
@@ -25,6 +25,15 @@ func _on_pizza_generated(review):
 
 [sub_resource type="LabelSettings" id="LabelSettings_v6jqn"]
 
+[sub_resource type="Gradient" id="Gradient_64ruq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.941176, 0.647059, 0.486275, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gneow"]
+gradient = SubResource("Gradient_64ruq")
+width = 128
+height = 128
+
 [sub_resource type="Gradient" id="Gradient_ammxa"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.678431, 0, 0, 1)
@@ -34,21 +43,21 @@ gradient = SubResource("Gradient_ammxa")
 width = 128
 height = 128
 
+[sub_resource type="Gradient" id="Gradient_vnq0g"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.156863, 0.490196, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_slx6u"]
+gradient = SubResource("Gradient_vnq0g")
+width = 128
+height = 128
+
 [sub_resource type="Gradient" id="Gradient_c7qmy"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ao0wq"]
 gradient = SubResource("Gradient_c7qmy")
-width = 128
-height = 128
-
-[sub_resource type="Gradient" id="Gradient_64ruq"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.941176, 0.647059, 0.486275, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gneow"]
-gradient = SubResource("Gradient_64ruq")
 width = 128
 height = 128
 
@@ -88,15 +97,6 @@ gradient = SubResource("Gradient_g6nsx")
 width = 128
 height = 128
 
-[sub_resource type="Gradient" id="Gradient_4xf31"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.764706, 0.705882, 0.156863, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_icly7"]
-gradient = SubResource("Gradient_4xf31")
-width = 128
-height = 128
-
 [sub_resource type="Gradient" id="Gradient_kew4w"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.0784314, 0.0588235, 0.0784314, 1)
@@ -106,16 +106,22 @@ gradient = SubResource("Gradient_kew4w")
 width = 128
 height = 128
 
-[sub_resource type="Gradient" id="Gradient_vnq0g"]
+[sub_resource type="Gradient" id="Gradient_4xf31"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.156863, 0.490196, 0, 1)
+colors = PackedColorArray(0.764706, 0.705882, 0.156863, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_slx6u"]
-gradient = SubResource("Gradient_vnq0g")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_icly7"]
+gradient = SubResource("Gradient_4xf31")
 width = 128
 height = 128
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("sterne", "rect", "google_review_label", "pizzas_served", "average_stars")]
+[sub_resource type="InputEventAction" id="InputEventAction_5rasy"]
+action = &"escape"
+
+[sub_resource type="Shortcut" id="Shortcut_2uag2"]
+events = [SubResource("InputEventAction_5rasy")]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("sterne", "rect", "google_review_label", "pizzas_served", "average_stars", "clock", "ten_seconds_timer")]
 script = ExtResource("2_4t4tb")
 sterne = NodePath("CenterContainer")
 rect = NodePath("VBoxContainer/HBoxContainer3/VBoxContainer/ColorRect")
@@ -123,6 +129,8 @@ win_threshold = 3.0
 google_review_label = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer3/Label")
 pizzas_served = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2/Label2")
 average_stars = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2/Label3")
+clock = NodePath("VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2/HBoxContainer/Uhrzeit")
+ten_seconds_timer = NodePath("TenSecondsTimer")
 
 [node name="RoundnessCalculator" type="RoundnessCalculator" parent="."]
 
@@ -199,6 +207,16 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Uhrzeit:"
+
+[node name="Uhrzeit" type="Label" parent="VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 text = "Bisher servierte Pizzen: 0"
@@ -213,57 +231,68 @@ unbekannt"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="dough_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Teig"
+texture_normal = SubResource("GradientTexture2D_gneow")
+metadata/_edit_use_anchors_ = true
+
 [node name="tomato_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Tomatensoße"
 texture_normal = SubResource("GradientTexture2D_qimlj")
+metadata/_edit_use_anchors_ = true
+
+[node name="pesto_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Pesto"
+texture_normal = SubResource("GradientTexture2D_slx6u")
 metadata/_edit_use_anchors_ = true
 
 [node name="mozarella_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Mozzarella"
 texture_normal = SubResource("GradientTexture2D_ao0wq")
-metadata/_edit_use_anchors_ = true
-
-[node name="dough_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_gneow")
 metadata/_edit_use_anchors_ = true
 
 [node name="salami_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Salami"
 texture_normal = SubResource("GradientTexture2D_vto61")
 metadata/_edit_use_anchors_ = true
 
 [node name="prosciutto_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Prosciutto"
 texture_normal = SubResource("GradientTexture2D_05vr6")
 metadata/_edit_use_anchors_ = true
 
 [node name="rucola_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Rucola"
 texture_normal = SubResource("GradientTexture2D_nadon")
 metadata/_edit_use_anchors_ = true
 
 [node name="basil_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Basilikum"
 texture_normal = SubResource("GradientTexture2D_8lkr3")
-metadata/_edit_use_anchors_ = true
-
-[node name="pineapple_button (don\'t press)" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_icly7")
 metadata/_edit_use_anchors_ = true
 
 [node name="olives_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Oliven"
 texture_normal = SubResource("GradientTexture2D_7x1lv")
 metadata/_edit_use_anchors_ = true
 
-[node name="pesto_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="pineapple_button (don\'t press)" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_slx6u")
+tooltip_text = "Ananas"
+texture_normal = SubResource("GradientTexture2D_icly7")
 metadata/_edit_use_anchors_ = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
 offset_right = 1316.0
 offset_bottom = 648.0
 size_flags_horizontal = 3
@@ -294,6 +323,15 @@ scale = Vector2(0.075, 0.075)
 layout_mode = 2
 text = "Nächste Pizza"
 
+[node name="TenSecondsTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="main_menu_button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+shortcut = SubResource("Shortcut_2uag2")
+text = "Zurück zum Hauptmenü"
+
 [connection signal="invalid_polygon" from="RoundnessCalculator" to="." method="_on_roundness_calculator_invalid_polygon"]
 [connection signal="roundness" from="RoundnessCalculator" to="." method="_on_roundness_calculator_roundness"]
 [connection signal="request_completed" from="HTTPRequest" to="VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer3/Label" method="_on_http_request_request_completed"]
@@ -303,14 +341,16 @@ text = "Nächste Pizza"
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/width slider" to="." method="set_width"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Button2" to="." method="in_den_ofen_schieben"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/HBoxContainer2/VBoxContainer3/NewPizza" to="." method="_on_new_pizza_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/tomato_button" to="." method="_on_tomato_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/mozarella_button" to="." method="_on_mozarella_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/dough_button" to="." method="_on_dough_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/tomato_button" to="." method="_on_tomato_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/pesto_button" to="." method="_on_pesto_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/mozarella_button" to="." method="_on_mozarella_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/salami_button" to="." method="_on_salami_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/prosciutto_button" to="." method="_on_prosciutto_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/rucola_button" to="." method="_on_rucola_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/basil_button" to="." method="_on_basil_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/pineapple_button (don't press)" to="." method="_on_pineapple_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/olives_button" to="." method="_on_olives_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/pesto_button" to="." method="_on_pesto_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/pineapple_button (don't press)" to="." method="_on_pineapple_button_pressed"]
 [connection signal="pressed" from="CenterContainer/Button" to="." method="_on_next_pizza_pressed"]
+[connection signal="timeout" from="TenSecondsTimer" to="." method="_on_ten_seconds_timer_timeout"]
+[connection signal="button_up" from="main_menu_button" to="." method="main_menu"]

@@ -9,23 +9,21 @@ var last_mouse_position: Vector2
 @export var google_review_label: Label
 @export var pizzas_served : Label
 @export var average_stars : Label
+@export var clock : Label
+@export var ten_seconds_timer : Timer
+
+var time_offset_in_real_seconds = 0
 
 var points = {}
 
-var scores = []
-
-func average_score():
-	return (float(scores.reduce(sum, 0))/float(scores.size()))
-
 func evaluate_day():
-	Score.set_average(average_score())
 	get_tree().change_scene_to_file("res://evaluation.tscn")
 
 func sum(accumulator, next):
 	return accumulator + next
 
 func add_score(score: int):
-	scores.append(score)
+	Score.scores_of_the_day.append(score)
 	
 func clear():
 	points = {}
@@ -37,8 +35,11 @@ func set_color(new_color):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Score.scores_of_the_day = []
 	LoadGoogleReview.google_pizza_review_requester.done.connect(_on_pizza_generated)
 	LoadGoogleReview.neue_pizza()
+	ten_seconds_timer.start()
+	update_clock()
 
 func _on_pizza_generated(review):
 	google_review_label.text = "Google Rezension der bestellten Pizza: %s" % review
@@ -86,8 +87,7 @@ func _on_color_rect_new_line(previous, next):
 	add_point(next)
 
 func _on_roundness_calculator_invalid_polygon():
-	print("Invalid Polygon")
-	reveal_score(0)
+	print("Invalid polygon")
 	clear()
 	
 func _sauce_calculator(optimal_circle_radius,optimal_circle_center):
@@ -142,10 +142,21 @@ func _on_next_pizza_pressed():
 	hide_score()
 	LoadGoogleReview.neue_pizza()
 	clear()
-	pizzas_served.text = "Bisher servierte Pizzen: %d" % scores.size()
-	average_stars.text = "Durchschnittliche Sterne:\n%f" % average_score()
-	if scores.size() == 3:
-		evaluate_day()
+	pizzas_served.text = "Bisher servierte Pizzen: %d" % Score.scores_of_the_day.size()
+	average_stars.text = "Durchschnittliche Sterne:\n%f" % Score.average()
 
 func _on_new_pizza_pressed():
 	LoadGoogleReview.neue_pizza()
+
+
+func _on_ten_seconds_timer_timeout():
+	time_offset_in_real_seconds += 10
+	update_clock()
+
+func update_clock():
+	clock.text = "%d:%d" % [(18 + int(time_offset_in_real_seconds / 60)), time_offset_in_real_seconds % 60]
+	if time_offset_in_real_seconds >= 4 * 60:
+		evaluate_day()
+
+func main_menu():
+	get_tree().change_scene_to_file("res://main_menu.tscn")

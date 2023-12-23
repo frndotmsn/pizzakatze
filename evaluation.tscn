@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Evaluation.gd" id="1_8byss"]
 
-[node name="Evaluation" type="Node2D" node_paths=PackedStringArray("message", "average_score")]
+[node name="Evaluation" type="Node2D" node_paths=PackedStringArray("message", "average_score", "total_points")]
 script = ExtResource("1_8byss")
 message = NodePath("CenterContainer/VBoxContainer/CenterContainer/BoxContainer/Message")
 average_score = NodePath("CenterContainer/VBoxContainer/HBoxContainer/AverageScore")
 threshold = 3.0
+total_points = NodePath("CenterContainer/VBoxContainer/HBoxContainer2/Total Points")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_right = 1316.0
@@ -41,6 +42,50 @@ text = "Durchschnittliche Punktzahl:"
 [node name="AverageScore" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "unbekannt"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Insgesamte Punkte:"
+
+[node name="Total Points" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "unbekannt"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OldOrNewHighscore" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Neuer/Alter"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Highscore:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Highscore" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "unbekannt"
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "bei"
+
+[node name="HighscorePizzas" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "unbekannt"
+
+[node name="Label4" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Pizzen"
 
 [node name="BackToMainScreen" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
